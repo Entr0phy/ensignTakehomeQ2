@@ -18,37 +18,39 @@ const ProductPage = () => {
     getData();
   }, [id]);
 
-  function addToCart () {
-    setCart((prevState : Cart) => {
-        if(product && product.title && typeof product.price === 'number') {
-            const itemIndex:number = prevState.cartItems.findIndex(e => e?.itemName === product?.title)
-
-            if(itemIndex !== -1){
-                //shallow copy of cart Items
-                const newCartItems = [...prevState.cartItems]
-                newCartItems[itemIndex] = {
-                    ...newCartItems[itemIndex],
-                    itemCount: newCartItems[itemIndex].itemCount + 1
-                }
-                return {
-                    cartItems: newCartItems,
-                    totalCount: prevState.totalCount +1
-                }
-            }
-    
-            
-            else{
-                return {
-                    cartItems: [...prevState.cartItems, {itemName: product?.title, itemCount:1, price: product?.price}],
-                    totalCount: prevState.totalCount+1
-                }
-            }
+  function addToCart() {
+    setCart((prevState: Cart) => {
+      if (product && product.title && typeof product.price === 'number' && typeof product.image === 'string') {
+        const itemIndex = prevState.cartItems.findIndex(e => e.itemName === product.title);
+  
+        if (itemIndex !== -1) {
+          // Product exists, increment itemCount
+          const newCartItems = [...prevState.cartItems];
+          newCartItems[itemIndex] = {
+            ...newCartItems[itemIndex],
+            itemCount: newCartItems[itemIndex].itemCount + 1,
+          };
+          return {
+            ...prevState,
+            cartItems: newCartItems,
+            totalCount: prevState.totalCount + 1,
+            totalPrice: prevState.totalPrice + newCartItems[itemIndex].price
+          };
+        } else {
+          // Product does not exist, add new product to cart
+          const newProduct = { itemName: product.title, itemCount: 1, price: product.price, itemPicture: product.image };
+          return {
+            ...prevState,
+            cartItems: [...prevState.cartItems, newProduct],
+            totalCount: prevState.totalCount + 1,
+            totalPrice: prevState.totalPrice + newProduct.price
+          };
         }
-        return prevState
-        })
-    window.alert('Added To Cart');
-    window.location.reload();
+      }
+      return prevState;
+    });
   }
+  
   return (
     <div className=" flex flex-col max-w-6xl mx-auto justify-center items-center bg-gray-200 p-2 rounded">
       <div className="p-2 border-2 rounded">

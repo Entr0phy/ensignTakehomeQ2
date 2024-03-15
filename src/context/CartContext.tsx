@@ -1,14 +1,15 @@
-import { createContext, useState, Dispatch, SetStateAction, ReactNode, useEffect} from "react";
+import { createContext, useState, Dispatch, SetStateAction, ReactNode, useEffect } from "react";
 
-interface cartItem {
+export interface cartItem {
     itemName: string;
     itemCount: number;
+    itemPicture: string;
     price: number;
 }
 export interface Cart {
-    // optional value for cartItems since cart can be empty
   cartItems: cartItem[];
   totalCount: number;
+  totalPrice: number;
 }
 
 export interface cartContextInterface {
@@ -25,7 +26,8 @@ function getInitialCartState() : cartContextInterface ["cart"] {
     }
     return {
         cartItems: [],
-        totalCount:0
+        totalCount:0,
+        totalPrice:0
     }
 }
 

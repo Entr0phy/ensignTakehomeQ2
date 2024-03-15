@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useContext } from "react";
-import CartProvider, { CartContext } from "./context/CartContext";
+import { CartContext } from "./context/CartContext";
 import Home from "./component/home";
-import Cart from "./component/cart";
+import MyCart from "./component/myCart";
 import Product from "./component/product";
 import Error from './component/error'
 import { FaShoppingCart } from "react-icons/fa";
@@ -11,7 +11,6 @@ import { FaShoppingCart } from "react-icons/fa";
 function App() {
   const { cart } = useContext(CartContext);
   return (
-    <CartProvider>
       <Router>
         <div className="flex justify-between p-4 bg-orange-200">
           <div>
@@ -32,14 +31,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/component/cart" element={<Cart />} />
+          <Route path="/component/cart" element={<MyCart />} />
 
           <Route path="/component/product/:id" element={<Product/>} />
 
           <Route path='*' element={<Error/>}/>
         </Routes>
       </Router>
-    </CartProvider>
   );
 }
 
