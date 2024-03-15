@@ -1,5 +1,10 @@
 # Ensign Take Home Question 2 Shopping Cart
 
+## Steps to run the web
+- clone the repo
+- npm i
+- npm run dev
+  
 ## Technologies Used
 
 ### Vite + Typescript + React
