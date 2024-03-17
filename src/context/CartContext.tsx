@@ -31,14 +31,14 @@ function getInitialCartState() : cartContextInterface ["cart"] {
     }
 }
 
-const defaultState = {
+export const defaultState = {
     cart: getInitialCartState(),
     setCart: () => {}
 } as cartContextInterface
 
 export const CartContext = createContext<cartContextInterface>(defaultState)
 
-type CartProviderProps = {
+export type CartProviderProps = {
     children: ReactNode
 }
 
